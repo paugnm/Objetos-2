@@ -55,7 +55,14 @@ public class ToDoItem {
 	 * error informando la causa específica del mismo.
 	 */
 	public Duration workedTime() {
-		return state.workedTime(this);
+		if (this.inicio == null) {
+			throw new RuntimeException("El objeto ToDoItem no ha iniciado la tarea todavía");
+		}
+		
+		if (this.fin != null) {
+			return Duration.between(inicio, fin);
+		}		
+		return Duration.between(inicio, LocalDateTime.now());
 	}
 
 	/**
@@ -63,9 +70,8 @@ public class ToDoItem {
 	 * contrario no hace nada."
 	 */
 	public void addComment(String comment) {
-		state.addComment(this,comment);
-	}
-	
+		if (this.fin == null) this.comments.add(comment);
+	}	
 	
 	public void setState (State state) {
 		this.state = state;
@@ -80,14 +86,5 @@ public class ToDoItem {
 		this.fin = fin;
 	}
 
-	public Duration calcularDuracion() {		
-		if (this.fin != null) {
-			return Duration.between(inicio, fin);
-		}		
-		return Duration.between(inicio, LocalDateTime.now());
-	}
 	
-	public void setComment (String comment) {
-		comments.add(comment);
-	}
 }

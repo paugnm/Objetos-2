@@ -1,15 +1,7 @@
 package ar.edu.unlp.info.oo2.toDoItem;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-
 public class PausedState extends State {
 
-	@Override
-	public void start(ToDoItem item) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void togglePause(ToDoItem item) {
@@ -18,18 +10,8 @@ public class PausedState extends State {
 
 	@Override
 	public void finish(ToDoItem item) {
-		item.setState(new FinishedState());
-		item.setFin(LocalDateTime.now());
-	}
-
-	@Override
-	public Duration workedTime(ToDoItem item) {
-		return item.calcularDuracion();
+		item.setState(new FinishedState(item));
 	}
 	
-	@Override
-	public void addComment(ToDoItem item, String comment) {
-		item.setComment(comment);		
-	}
 
 }
