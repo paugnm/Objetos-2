@@ -14,7 +14,7 @@ public class Decodificador {
 		this.grilla = new ArrayList<Pelicula>();
 		this.peliculasVistas = new ArrayList<Pelicula>();
 		
-		//La estrategia de recomendación por defecto serán la novedad
+		//La estrategia de recomendación por defecto será la novedad
 		this.recomendador = new Novedad();
 	}
 	
@@ -27,7 +27,7 @@ public class Decodificador {
 	}
 	
 	
-	public Pelicula recomendarPelicula() {
+	public List<Pelicula> recomendarPeliculas() {
 		return this.recomendador.recomendar(this.grilla, this.peliculasVistas);
 	}
 }
